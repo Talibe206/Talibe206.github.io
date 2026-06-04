@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[COMPANY NAME] — Structured Cabling, Fiber & Low-Voltage Infrastructure</title>
+<meta name="description" content="Federal and commercial structured cabling, fiber optic installation and splicing, low-voltage systems, and construction build-out. Built to ANSI/TIA and EM385-1-1 spec.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --bg-2:#0e1420;
+    --surface:#121a28;
+    --surface-2:#16202f;
+    --line:#1f2c3f;
+    --line-bright:#2c3e57;
+    --text:#e7eef6;
+    --muted:#8a99ad;
+    --muted-2:#5e6e84;
+    --amber:#ff8a14;
+    --amber-soft:#ffb05a;
+    --cyan:#39d6c9;
+    --hi:#cfe7ff;
+    --maxw:1240px;
+    --ease:cubic-bezier(.16,.84,.32,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Public Sans",sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* blueprint grid base */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(44,62,87,.18) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(44,62,87,.18) 1px,transparent 1px);
+    background-size:46px 46px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 25%,transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 25%,transparent 80%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .amber{color:var(--amber)}
+
+  /* ============ HEADER ============ */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:linear-gradient(180deg,rgba(10,14,20,.92),rgba(10,14,20,.7));
+    border-bottom:1px solid transparent;
+    transition:border-color .3s,background .3s;
+  }
+  header.scrolled{border-bottom-color:var(--line);background:rgba(10,14,20,.96)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:13px;font-family:"Archivo";font-weight:800}
+  .mark{
+    width:38px;height:38px;border:2px solid var(--amber);position:relative;
+    display:grid;place-items:center;flex:0 0 auto;
+  }
+  .mark::before{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--cyan);transform:rotate(45deg)}
+  .mark::after{content:"";position:absolute;width:4px;height:4px;background:var(--amber);border-radius:50%}
+  .brand .name{font-size:18px;letter-spacing:.06em;line-height:1.05}
+  .brand .name small{display:block;font-family:"JetBrains Mono";font-weight:400;font-size:9.5px;letter-spacing:.32em;color:var(--muted);margin-top:2px}
+  nav ul{display:flex;gap:34px;list-style:none;font-size:13.5px;font-weight:600;letter-spacing:.02em}
+  nav ul a{color:var(--muted);transition:color .2s;position:relative}
+  nav ul a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--amber);transition:width .25s var(--ease)}
+  nav ul a:hover{color:var(--text)}
+  nav ul a:hover::after{width:100%}
+  .nav-cta{
+    font-family:"Archivo";font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--amber);color:#0a0e14;padding:11px 20px;border:1px solid var(--amber);
+    transition:transform .2s var(--ease),box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px var(--amber)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line-bright);color:var(--text);width:42px;height:42px;font-size:20px;cursor:pointer}
+  @media(max-width:980px){
+    nav ul,.nav-cta{display:none}
+    .menu-btn{display:block}
+    nav.open ul{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:var(--bg-2);border-bottom:1px solid var(--line);padding:18px 28px;gap:18px}
+  }
+
+  /* ============ HERO ============ */
+  .hero{position:relative;padding:170px 0 90px;overflow:hidden}
+  .hero-glow{position:absolute;top:-10%;right:-5%;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,138,20,.13),transparent 62%);filter:blur(20px);z-index:1;
+    transition:transform .35s var(--ease);will-change:transform}
+  .hero-glow.two{left:-10%;top:30%;width:520px;height:520px;background:radial-gradient(circle,rgba(57,214,201,.09),transparent 62%)}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;font-family:"JetBrains Mono";font-size:12px;
+    letter-spacing:.22em;color:var(--cyan);text-transform:uppercase;margin-bottom:26px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--cyan)}
+  h1{
+    font-family:"Archivo";font-weight:900;font-size:clamp(40px,6.4vw,82px);line-height:.98;
+    letter-spacing:-.025em;max-width:16ch;
+  }
+  h1 .out{
+    color:transparent;-webkit-text-stroke:1.4px var(--amber);
+    position:relative;display:inline-block;cursor:default;
+  }
+  /* solid amber fill, revealed only around the cursor via a moving mask */
+  h1 .out::after{
+    content:attr(data-text);
+    position:absolute;left:0;top:0;
+    color:var(--amber);-webkit-text-stroke:0;
+    text-shadow:0 0 22px rgba(255,138,20,.55),0 0 4px rgba(255,138,20,.4);
+    pointer-events:none;
+    -webkit-mask:radial-gradient(circle 130px at var(--mx,-200px) var(--my,-200px),#000 0%,rgba(0,0,0,.35) 55%,transparent 75%);
+            mask:radial-gradient(circle 130px at var(--mx,-200px) var(--my,-200px),#000 0%,rgba(0,0,0,.35) 55%,transparent 75%);
+    transition:opacity .4s ease;
+  }
+  /* touch / no-hover devices: gentle auto-sweep so it isn't dead */
+  @media (hover:none){
+    h1 .out::after{animation:sweep 5.5s var(--ease) infinite}
+  }
+  @property --mx{syntax:'<length-percentage>';inherits:false;initial-value:-200px}
+  @property --my{syntax:'<length-percentage>';inherits:false;initial-value:-200px}
+  @keyframes sweep{
+    0%{--mx:-10%;--my:50%}50%{--mx:110%;--my:50%}100%{--mx:-10%;--my:50%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    h1 .out::after{animation:none;-webkit-mask:none;mask:none;opacity:.18}
+  }
+  .hero p.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:56ch;margin:28px 0 38px;line-height:1.55}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn{
+    font-family:"Archivo";font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+    padding:16px 28px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    transition:transform .2s var(--ease),box-shadow .25s,background .2s,color .2s;border:1px solid;
+  }
+  .btn-primary{background:var(--amber);border-color:var(--amber);color:#0a0e14}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -12px var(--amber)}
+  .btn-ghost{background:transparent;border-color:var(--line-bright);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
+  .btn svg{width:16px;height:16px}
+
+  /* credential strip */
+  .creds{
+    margin-top:64px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,26,40,.6),rgba(14,20,32,.4));
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .cred{padding:22px 24px;border-right:1px solid var(--line)}
+  .cred:last-child{border-right:none}
+  .cred .k{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.18em;color:var(--muted-2);text-transform:uppercase}
+  .cred .v{font-family:"Archivo";font-weight:800;font-size:21px;margin-top:6px;letter-spacing:.01em}
+  .cred .v.small{font-size:15px;letter-spacing:.04em;font-family:"JetBrains Mono";font-weight:500;color:var(--amber)}
+  @media(max-width:760px){.creds{grid-template-columns:repeat(2,1fr)}.cred:nth-child(2n){border-right:none}.cred{border-bottom:1px solid var(--line)}}
+
+  /* ============ SECTION SHELL ============ */
+  section{position:relative;padding:96px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+  .sec-num{font-family:"JetBrains Mono";font-size:12.5px;letter-spacing:.24em;color:var(--amber);text-transform:uppercase;display:flex;align-items:center;gap:12px}
+  .sec-num::before{content:"";width:26px;height:1px;background:var(--amber)}
+  h2{font-family:"Archivo";font-weight:800;font-size:clamp(30px,4vw,46px);line-height:1.04;letter-spacing:-.02em;margin-top:14px;max-width:18ch}
+  .sec-head p{color:var(--muted);max-width:44ch;font-size:15.5px}
+
+  /* ============ CAPABILITIES ============ */
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .cap{background:var(--surface);padding:34px 30px;position:relative;transition:background .3s}
+  .cap:hover{background:var(--surface-2)}
+  .cap::before{content:"";position:absolute;left:0;top:0;width:0;height:3px;background:var(--amber);transition:width .35s var(--ease)}
+  .cap:hover::before{width:100%}
+  .cap-id{font-family:"JetBrains Mono";font-size:11px;color:var(--muted-2);letter-spacing:.14em}
+  .cap-icon{width:46px;height:46px;border:1.5px solid var(--line-bright);display:grid;place-items:center;margin:18px 0 20px;color:var(--amber);transition:border-color .3s}
+  .cap:hover .cap-icon{border-color:var(--amber)}
+  .cap-icon svg{width:24px;height:24px}
+  .cap h3{font-family:"Archivo";font-weight:700;font-size:20px;letter-spacing:-.01em;margin-bottom:10px}
+  .cap p{font-size:14.5px;color:var(--muted);line-height:1.55}
+  .cap ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:7px}
+  .cap ul li{font-family:"JetBrains Mono";font-size:11.5px;color:var(--hi);letter-spacing:.02em;padding-left:16px;position:relative}
+  .cap ul li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--cyan)}
+  @media(max-width:900px){.cap-grid{grid-template-columns:1fr}}
+
+  /* ============ STANDARDS ============ */
+  .standards{background:linear-gradient(180deg,var(--bg),var(--bg-2));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .std-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:start}
+  @media(max-width:880px){.std-grid{grid-template-columns:1fr;gap:34px}}
+  .std-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+  .std-item{display:flex;gap:20px;align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--line)}
+  .std-item .code{font-family:"JetBrains Mono";font-weight:700;font-size:13px;color:var(--amber);flex:0 0 168px;letter-spacing:.02em}
+  .std-item .desc{font-size:14.5px;color:var(--muted)}
+  @media(max-width:520px){.std-item{flex-direction:column;gap:5px}.std-item .code{flex:none}}
+  .badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .badge{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.06em;border:1px solid var(--line-bright);padding:9px 14px;color:var(--hi);background:var(--surface)}
+  .badge b{color:var(--amber)}
+
+  /* ============ PAST PERFORMANCE / WHY ============ */
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:760px){.why-grid{grid-template-columns:1fr}}
+  .why{background:var(--surface);padding:36px 32px}
+  .why .stat{font-family:"Archivo";font-weight:900;font-size:46px;color:var(--amber);line-height:1;letter-spacing:-.02em}
+  .why .stat span{font-size:24px;color:var(--text)}
+  .why .lbl{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:14px 0 0}
+  .why p.body{font-size:14.5px;color:var(--muted);margin-top:12px;line-height:1.55}
+
+  /* ============ CAPABILITY STATEMENT ============ */
+  .capstat{background:var(--bg-2);border-top:1px solid var(--line)}
+  .capstat-card{
+    border:1px solid var(--line-bright);background:
+      linear-gradient(135deg,rgba(255,138,20,.04),transparent 40%),var(--surface);
+    padding:0;overflow:hidden;
+  }
+  .capstat-top{display:flex;justify-content:space-between;align-items:flex-start;padding:34px 38px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:20px}
+  .capstat-top h3{font-family:"Archivo";font-weight:900;font-size:26px;letter-spacing:-.01em}
+  .capstat-top .tag{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase;margin-top:8px}
+  .capstat-body{display:grid;grid-template-columns:1.3fr 1fr;gap:0}
+  @media(max-width:820px){.capstat-body{grid-template-columns:1fr}}
+  .capstat-col{padding:34px 38px}
+  .capstat-col:first-child{border-right:1px solid var(--line)}
+  @media(max-width:820px){.capstat-col:first-child{border-right:none;border-bottom:1px solid var(--line)}}
+  .capstat-col h4{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
+  .comp-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .comp-list li{font-size:14.5px;padding-left:20px;position:relative;color:var(--hi)}
+  .comp-list li::before{content:"▸";position:absolute;left:0;color:var(--amber);font-size:12px}
+  .data-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+  .data-row:last-child{border-bottom:none}
+  .data-row .dk{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .data-row .dv{font-family:"JetBrains Mono";font-weight:500;color:var(--amber);text-align:right}
+  .capstat-foot{padding:24px 38px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .capstat-foot .poc{font-size:13px;color:var(--muted)}
+  .capstat-foot .poc b{color:var(--text)}
+
+  /* ============ PROCESS ============ */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--surface);padding:30px 26px}
+  .step .n{font-family:"Archivo";font-weight:900;font-size:40px;color:transparent;-webkit-text-stroke:1.2px var(--line-bright);line-height:1}
+  .step:hover .n{-webkit-text-stroke-color:var(--amber)}
+  .step h4{font-family:"Archivo";font-weight:700;font-size:17px;margin:16px 0 8px}
+  .step p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+  /* ============ CTA / CONTACT ============ */
+  .contact{background:linear-gradient(180deg,var(--bg-2),var(--bg));border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  @media(max-width:880px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+  .contact h2{max-width:14ch}
+  .contact .lead{color:var(--muted);margin:20px 0 28px;font-size:16px;max-width:42ch}
+  .contact-info{display:flex;flex-direction:column;gap:2px;margin-top:8px}
+  .ci{display:flex;gap:16px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line)}
+  .ci .cik{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;flex:0 0 120px}
+  .ci .civ{font-size:15px}
+  .ci .civ a:hover{color:var(--amber)}
+  form{display:flex;flex-direction:column;gap:16px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:480px){.row2{grid-template-columns:1fr}}
+  label{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block}
+  input,select,textarea{
+    width:100%;background:var(--surface);border:1px solid var(--line-bright);color:var(--text);
+    padding:13px 14px;font-family:"Public Sans";font-size:15px;transition:border-color .2s;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber)}
+  textarea{resize:vertical;min-height:110px}
+  .form-note{font-size:12px;color:var(--muted-2);font-family:"JetBrains Mono";letter-spacing:.03em}
+
+  /* ============ FOOTER ============ */
+  footer{border-top:1px solid var(--line);padding:54px 0 40px;background:var(--bg)}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+  .foot-codes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 36px;flex:1}
+  .fc .fck{font-family:"JetBrains Mono";font-size:10px;letter-spacing:.16em;color:var(--muted-2);text-transform:uppercase}
+  .fc .fcv{font-family:"JetBrains Mono";font-size:13px;color:var(--amber);margin-top:5px}
+  .foot-bot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:24px;gap:16px;flex-wrap:wrap}
+  .foot-bot p{font-size:12.5px;color:var(--muted-2)}
+
+  /* reveal animation */
+  [data-rise]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  [data-rise].in{opacity:1;transform:none}
+  .hero [data-rise]{transition-duration:.85s}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="top">
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#top">
+        <span class="mark"></span>
+        <span class="name">[COMPANY NAME]<small>INFRASTRUCTURE · LOW-VOLTAGE · FIBER</small></span>
+      </a>
+      <nav id="nav">
+        <ul>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#standards">Standards</a></li>
+          <li><a href="#performance">Performance</a></li>
+          <li><a href="#capability-statement">Cap Statement</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="nav-cta">Request a Quote</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="padding-top:170px">
+  <div class="hero-glow"></div>
+  <div class="hero-glow two"></div>
+  <div class="wrap">
+    <span class="eyebrow" data-rise>Federal · State · Commercial Contractor</span>
+    <h1 data-rise>Mission-critical connectivity, <span class="out" data-text="built to spec.">built to spec.</span></h1>
+    <p class="lead" data-rise style="transition-delay:.08s">
+      Structured cabling, fiber optic installation and splicing, low-voltage systems, and
+      construction build-out — engineered, tested, and certified to ANSI/TIA and EM&nbsp;385-1-1.
+      Inspection-ready work, documented every run.
+    </p>
+    <div class="hero-actions" data-rise style="transition-delay:.16s">
+      <a href="#contact" class="btn btn-primary">
+        Request a Quote
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#capability-statement" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        Capability Statement
+      </a>
+    </div>
+
+    <div class="creds" data-rise style="transition-delay:.24s">
+      <div class="cred"><div class="k">Business Type</div><div class="v">[SET-ASIDE]</div></div>
+      <div class="cred"><div class="k">SAM.gov UEI</div><div class="v small">[UEI — 12 CHAR]</div></div>
+      <div class="cred"><div class="k">CAGE Code</div><div class="v small">[CAGE]</div></div>
+      <div class="cred"><div class="k">Bonding Capacity</div><div class="v">$[X.XM]</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITIES ============ -->
+<section id="capabilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">01 / Capabilities</span>
+        <h2>One contractor, from rough-in to final certification.</h2>
+      </div>
+      <p>Self-performed scope across the low-voltage and structured infrastructure lifecycle — no subbing out the work that gets inspected.</p>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap" data-rise>
+        <div class="cap-id">CAP-01</div>
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="7" cy="7" r="1.4" fill="currentColor"/><circle cx="7" cy="12" r="1.4" fill="currentColor"/><circle cx="7" cy="17" r="1.4" fill="currentColor"/></svg></div>
+        <h3>Structured Cabling</h3>
+        <p>Copper backbone and horizontal distribution, dressed and labeled to TIA-606 administration standards.</p>
+        <ul><li>CAT5e / CAT6 / CAT6A</li><li>Cable tray + J-hook pathways</li><li>Rack & cabinet build-out</li><li>Permanent link testing</li></ul>
+      </div>
+      <div class="cap" data-rise style="transition-delay:.06s">
+        <div class="cap-id">CAP-02</div>
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12c4-6 14-6 18 0"/><path d="M3 12c4 6 14 6 18 0"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg></div>
+        <h3>Fiber Optic &amp; Splicing</h3>
+        <p>Single-mode and multimode install, fusion splicing, termination, and OTDR-verified certification.</p>
+        <ul><li>Fusion + mechanical splicing</li><li>OSP &amp; ISP fiber</li><li>OTDR + insertion-loss testing</li><li>Fiber pulling &amp; blowing</li></ul>
+      </div>
+      <div class="cap" data-rise style="transition-delay:.12s">
+        <div class="cap-id">CAP-03</div>
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v6m0 0l-3 3 3 9 3-9-3-3z"/></svg></div>
+        <h3>Low-Voltage Systems</h3>
+        <p>Integrated systems wiring for security, access control, AV, and building automation.</p>
+        <ul><li>Access control &amp; CCTV</li><li>Paging &amp; intercom</li><li>AV &amp; conference rooms</li><li>WAP &amp; DAS support cabling</li></ul>
+      </div>
+      <div class="cap" data-rise>
+        <div class="cap-id">CAP-04</div>
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>Device &amp; Finish Install</h3>
+        <p>Wall outlets, jacks, faceplates, switches, fixtures — terminated, mounted, and trimmed clean.</p>
+        <ul><li>Ethernet jacks &amp; faceplates</li><li>Switches &amp; receptacles</li><li>Lighting &amp; fixtures</li><li>Mounting &amp; finish trim</li></ul>
+      </div>
+      <div class="cap" data-rise style="transition-delay:.06s">
+        <div class="cap-id">CAP-05</div>
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3>Construction Build-Out</h3>
+        <p>Tenant improvement, demo, and rough-in coordination so cabling pathways are right the first time.</p>
+        <ul><li>TI &amp; renovation</li><li>Core drilling &amp; penetrations</li><li>Firestopping</li><li>Trade coordination</li></ul>
+      </div>
+      <div class="cap" data-rise style="transition-delay:.12s">
+        <div class="cap-id">CAP-06</div>
+        <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Testing &amp; Certification</h3>
+        <p>Every run documented. Test reports and as-builts delivered as a closeout package, not an afterthought.</p>
+        <ul><li>Fluke certification reports</li><li>OTDR traces</li><li>Labeled as-builts</li><li>Warranty registration</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STANDARDS ============ -->
+<section id="standards" class="standards">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">02 / Standards &amp; Compliance</span>
+        <h2>The codes a contracting officer is looking for.</h2>
+      </div>
+      <p>We design and document to the standards federal and commercial specs require — so submittals clear review on the first pass.</p>
+    </div>
+
+    <div class="std-grid">
+      <div data-rise>
+        <div class="std-list">
+          <div class="std-item"><span class="code">ANSI/TIA-568</span><span class="desc">Commercial building telecom cabling — performance &amp; topology.</span></div>
+          <div class="std-item"><span class="code">ANSI/TIA-606</span><span class="desc">Labeling &amp; administration of the telecom infrastructure.</span></div>
+          <div class="std-item"><span class="code">ANSI/TIA-607</span><span class="desc">Bonding &amp; grounding (earthing) for telecom systems.</span></div>
+          <div class="std-item"><span class="code">EM 385-1-1</span><span class="desc">USACE safety &amp; health requirements for federal job sites.</span></div>
+          <div class="std-item"><span class="code">NFPA 70 / NEC</span><span class="desc">National Electrical Code compliance on all installs.</span></div>
+          <div class="std-item"><span class="code">BICSI TDMM</span><span class="desc">Design &amp; install per BICSI best-practice methods.</span></div>
+        </div>
+      </div>
+      <div data-rise style="transition-delay:.1s">
+        <h4 style="font-family:'Archivo';font-weight:700;font-size:19px;margin-bottom:6px">Certifications &amp; manufacturer programs</h4>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.6">Hold and maintain the credentials that back up warranty-grade installs and keep crews compliant on federal sites. <span style="color:var(--muted-2)">[Edit to reflect what your team actually holds — do not list certs you can't document.]</span></p>
+        <div class="badges">
+          <span class="badge"><b>BICSI</b> Installer / Technician</span>
+          <span class="badge"><b>OSHA</b> 30-Hour</span>
+          <span class="badge"><b>OSHA</b> 10-Hour</span>
+          <span class="badge"><b>EM 385</b> CHST / SSHO</span>
+          <span class="badge">Corning <b>CNCI</b></span>
+          <span class="badge">CommScope <b>SP²</b></span>
+          <span class="badge">Panduit <b>PCI</b></span>
+          <span class="badge">Leviton Certified</span>
+          <span class="badge"><b>Bonded</b> &amp; Insured</span>
+          <span class="badge"><b>State Lic.</b> [#]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERFORMANCE ============ -->
+<section id="performance">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">03 / Past Performance</span>
+        <h2>Track record is the only credential that's hard to fake.</h2>
+      </div>
+      <p>Replace these with real, citable contracts. Primes and COs will check — accuracy beats inflation every time.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why" data-rise>
+        <div class="stat">[##]<span>+</span></div>
+        <div class="lbl">Contracts completed</div>
+        <p class="body">Federal, state, and commercial — delivered on schedule and within the closeout window.</p>
+      </div>
+      <div class="why" data-rise style="transition-delay:.06s">
+        <div class="stat">[###]<span>k</span></div>
+        <div class="lbl">Drops terminated &amp; tested</div>
+        <p class="body">Every drop labeled and certified, with reports delivered in the as-built package.</p>
+      </div>
+      <div class="why" data-rise style="transition-delay:.12s">
+        <div class="stat">[##]<span>mi</span></div>
+        <div class="lbl">Fiber pulled &amp; spliced</div>
+        <p class="body">OSP and ISP fiber, OTDR-verified end to end across campus and facility builds.</p>
+      </div>
+      <div class="why" data-rise style="transition-delay:.18s">
+        <div class="stat">0</div>
+        <div class="lbl">Recordable safety incidents</div>
+        <p class="body">[Replace with your real EMR / DART rate.] A clean safety record keeps you eligible on federal sites.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;border:1px solid var(--line);background:var(--surface);padding:30px 32px" data-rise>
+      <h4 style="font-family:'JetBrains Mono';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:18px">Representative Projects — replace with real references</h4>
+      <div class="data-row"><span class="dk">[Agency / Prime] · [Project name]</span><span class="dv">[$VALUE] · [YEAR]</span></div>
+      <div class="data-row"><span class="dk">[Agency / Prime] · [Project name]</span><span class="dv">[$VALUE] · [YEAR]</span></div>
+      <div class="data-row"><span class="dk">[Agency / Prime] · [Project name]</span><span class="dv">[$VALUE] · [YEAR]</span></div>
+      <p style="margin-top:16px;font-size:12.5px;color:var(--muted-2);font-family:'JetBrains Mono'">Include a contracting-officer POC + phone for each. That single line does more than the whole rest of the site.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITY STATEMENT ============ -->
+<section id="capability-statement" class="capstat">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">04 / Capability Statement</span>
+        <h2>The one-pager that does your selling.</h2>
+      </div>
+      <p>This is what you hand a CO or a prime. Keep it to a single page, current, and PDF. It's the most important asset on this entire site.</p>
+    </div>
+
+    <div class="capstat-card" data-rise>
+      <div class="capstat-top">
+        <div>
+          <h3>[COMPANY NAME]</h3>
+          <div class="tag">Capability Statement · [SET-ASIDE STATUS]</div>
+        </div>
+        <a href="#" class="btn btn-primary" id="dlCap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="capstat-body">
+        <div class="capstat-col">
+          <h4>Core Competencies</h4>
+          <ul class="comp-list">
+            <li>Structured cabling — copper backbone &amp; horizontal, TIA-606 administration</li>
+            <li>Fiber optic install, fusion splicing &amp; OTDR certification (SM/MM, OSP/ISP)</li>
+            <li>Low-voltage systems: access control, CCTV, AV, paging, WAP/DAS support</li>
+            <li>Device &amp; finish install: jacks, outlets, switches, fixtures</li>
+            <li>Construction build-out, TI, core drilling, firestopping &amp; trade coordination</li>
+            <li>Test, certification &amp; as-built closeout documentation</li>
+          </ul>
+          <h4 style="margin-top:28px">Differentiators</h4>
+          <ul class="comp-list">
+            <li>Self-performed install crews — not brokered to subs</li>
+            <li>Inspection-ready documentation on every run</li>
+            <li>[Set-aside] status simplifies your acquisition path</li>
+            <li>Clean safety record &amp; EM 385-compliant on federal sites</li>
+          </ul>
+        </div>
+        <div class="capstat-col">
+          <h4>Company Data</h4>
+          <div class="data-row"><span class="dk">UEI</span><span class="dv">[UEI]</span></div>
+          <div class="data-row"><span class="dk">CAGE</span><span class="dv">[CAGE]</span></div>
+          <div class="data-row"><span class="dk">DUNS (legacy)</span><span class="dv">[IF APPLICABLE]</span></div>
+          <div class="data-row"><span class="dk">Business Type</span><span class="dv">[SDVOSB/8a/etc]</span></div>
+          <div class="data-row"><span class="dk">State Lic.</span><span class="dv">[LICENSE #]</span></div>
+          <div class="data-row"><span class="dk">Bonding</span><span class="dv">$[X.XM]</span></div>
+
+          <h4 style="margin-top:28px">NAICS Codes</h4>
+          <div class="data-row"><span class="dk">238210</span><span class="dv">Electrical Contractors</span></div>
+          <div class="data-row"><span class="dk">517311</span><span class="dv">Wired Telecom</span></div>
+          <div class="data-row"><span class="dk">237130</span><span class="dv">Power &amp; Comm Line</span></div>
+          <div class="data-row"><span class="dk">238290</span><span class="dv">Other Bldg Equip</span></div>
+          <p style="margin-top:14px;font-size:11.5px;color:var(--muted-2);font-family:'JetBrains Mono'">Verify your actual NAICS in SAM.gov — primary first.</p>
+        </div>
+      </div>
+      <div class="capstat-foot">
+        <div class="poc">POC: <b>[NAME]</b> · [TITLE] · <b>[PHONE]</b> · [EMAIL]</div>
+        <div class="poc" style="font-family:'JetBrains Mono';font-size:11px;color:var(--muted-2)">[CITY, STATE] · Registered in SAM.gov &amp; [STATE] vendor systems</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">05 / How We Work</span>
+        <h2>Predictable on paper, clean in the field.</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step" data-rise><div class="n">01</div><h4>Scope &amp; Walk</h4><p>Site walk, drawing review, and a written scope so there are no change-order surprises.</p></div>
+      <div class="step" data-rise style="transition-delay:.06s"><div class="n">02</div><h4>Submittals</h4><p>Product data, shop drawings, and safety plans built to the spec section before mobilization.</p></div>
+      <div class="step" data-rise style="transition-delay:.12s"><div class="n">03</div><h4>Install</h4><p>Self-performed crews, daily reports, and coordination that keeps the GC schedule honest.</p></div>
+      <div class="step" data-rise style="transition-delay:.18s"><div class="n">04</div><h4>Test &amp; Close</h4><p>Certification reports, labeled as-builts, and warranty registration — full closeout package.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div data-rise>
+        <span class="sec-num">06 / Contact</span>
+        <h2>Send the RFQ. We'll respond fast.</h2>
+        <p class="lead">Bid invites, RFQs, and capability questions — give us the scope and we'll turn around a clean, line-item quote.</p>
+        <div class="contact-info">
+          <div class="ci"><span class="cik">Estimating</span><span class="civ"><a href="mailto:[EMAIL]">[ESTIMATING@COMPANY.COM]</a></span></div>
+          <div class="ci"><span class="cik">Phone</span><span class="civ"><a href="tel:[PHONE]">[PHONE]</a></span></div>
+          <div class="ci"><span class="cik">Office</span><span class="civ">[STREET, CITY, STATE ZIP]</span></div>
+          <div class="ci"><span class="cik">Service Area</span><span class="civ">[REGION / NATIONWIDE]</span></div>
+        </div>
+      </div>
+      <div data-rise style="transition-delay:.1s">
+        <form id="rfq">
+          <div class="row2">
+            <div><label>Name</label><input type="text" name="name" required></div>
+            <div><label>Company / Agency</label><input type="text" name="company"></div>
+          </div>
+          <div class="row2">
+            <div><label>Email</label><input type="email" name="email" required></div>
+            <div><label>Phone</label><input type="tel" name="phone"></div>
+          </div>
+          <div>
+            <label>Project Type</label>
+            <select name="type">
+              <option>Structured cabling</option>
+              <option>Fiber install / splicing</option>
+              <option>Low-voltage systems</option>
+              <option>Device / finish install</option>
+              <option>Construction build-out</option>
+              <option>Multiple / full scope</option>
+            </select>
+          </div>
+          <div><label>Scope &amp; Details</label><textarea name="details" placeholder="Solicitation #, site, deadline, square footage, drop count, fiber type…"></textarea></div>
+          <button type="submit" class="btn btn-primary" style="justify-content:center">Send RFQ →</button>
+          <p class="form-note" id="formNote">→ This form is front-end only. Wire it to your email/CRM or a service like Formspree before launch.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top">
+        <span class="mark"></span>
+        <span class="name">[COMPANY NAME]<small>INFRASTRUCTURE · LOW-VOLTAGE · FIBER</small></span>
+      </a>
+      <div class="foot-codes">
+        <div class="fc"><div class="fck">SAM UEI</div><div class="fcv">[UEI]</div></div>
+        <div class="fc"><div class="fck">CAGE</div><div class="fcv">[CAGE]</div></div>
+        <div class="fc"><div class="fck">Primary NAICS</div><div class="fcv">238210</div></div>
+        <div class="fc"><div class="fck">Set-Aside</div><div class="fcv">[STATUS]</div></div>
+        <div class="fc"><div class="fck">State Lic.</div><div class="fcv">[#]</div></div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>© <span id="yr"></span> [COMPANY NAME]. All rights reserved.</p>
+      <p>Registered in SAM.gov · [STATE] vendor self-service</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header shadow on scroll
+  const header=document.getElementById('top');
+  addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>20));
+
+  // mobile menu
+  const nav=document.getElementById('nav'),mb=document.getElementById('menuBtn');
+  mb.addEventListener('click',()=>nav.classList.toggle('open'));
+  nav.addEventListener('click',e=>{if(e.target.tagName==='A')nav.classList.remove('open')});
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('[data-rise]').forEach((el,i)=>io.observe(el));
+  // fire hero immediately
+  document.querySelectorAll('.hero [data-rise]').forEach(el=>el.classList.add('in'));
+
+  // ===== cursor-reactive hero outline fill + parallax glow =====
+  (function(){
+    const out=document.querySelector('.out');
+    const hero=document.querySelector('.hero');
+    const glow=document.querySelector('.hero-glow');
+    if(!out||!hero)return;
+    let raf=null,lastX=0,lastY=0;
+    function apply(){
+      raf=null;
+      const r=out.getBoundingClientRect();
+      out.style.setProperty('--mx',(lastX-r.left)+'px');
+      out.style.setProperty('--my',(lastY-r.top)+'px');
+      if(glow){
+        const gx=(lastX/innerWidth-.5)*46, gy=(lastY/innerHeight-.5)*46;
+        glow.style.transform='translate('+gx+'px,'+gy+'px)';
+      }
+    }
+    hero.addEventListener('pointermove',e=>{
+      lastX=e.clientX;lastY=e.clientY;
+      if(!raf)raf=requestAnimationFrame(apply);
+    });
+    hero.addEventListener('pointerleave',()=>{
+      out.style.setProperty('--mx','-200px');
+      out.style.setProperty('--my','-200px');
+      if(glow)glow.style.transform='';
+    });
+  })();
+
+
+
+  // form stub
+  document.getElementById('rfq').addEventListener('submit',e=>{
+    e.preventDefault();
+    document.getElementById('formNote').textContent='→ Submit handler not connected. Hook this to your email/CRM before launch.';
+    document.getElementById('formNote').style.color='var(--amber)';
+  });
+
+  // cap statement download stub
+  document.getElementById('dlCap').addEventListener('click',e=>{
+    e.preventDefault();
+    alert('Replace this with a link to your real one-page capability statement PDF.');
+  });
+</script>
+</body>
+</html>
